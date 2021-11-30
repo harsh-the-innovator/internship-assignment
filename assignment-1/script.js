@@ -1,5 +1,7 @@
 const selector = document.getElementById("date-filter");
 const bankDataContainer = document.getElementById("bank-data");
+const dateSelector = document.getElementById("date-selector");
+const dateForm = document.getElementById("form-1");
 const todaysDate = new Date();
 let bankData = [];
 
@@ -26,7 +28,7 @@ function fiterByYesterday(eventsArray) {
   yesterdayDate.setDate(todaysDate.getDate() - 1);
   return eventsArray.filter((event) => {
     let eventDate = new Date(event.date);
-    return eventDate === yesterdayDate;
+    return eventDate.getTime() === yesterdayDate.getTime();
   });
 }
 
@@ -75,3 +77,22 @@ selector.addEventListener("change", function (e) {
   })}
 </ul>`;
 });
+
+function filterByCustomDate(eventsArray, givenDate) {
+  return eventsArray.filter((event) => {
+    let eventDate = new Date(event.date);
+    console.log(eventDate);
+    return eventDate.getTime() === givenDate.getTime();
+  });
+}
+
+dateForm.onsubmit = (e) => {
+  e.preventDefault();
+  let selectedDate = new Date(dateSelector.value);
+  let filteredData = filterByCustomDate(bankData, selectedDate);
+  bankDataContainer.innerHTML = `<ul id="bank-data-list">
+  ${filteredData.map((item) => {
+    return `<li>${item.title} - ${item.date}</li>`;
+  })}
+</ul>`;
+};
