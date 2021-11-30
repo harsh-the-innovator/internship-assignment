@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 1rem;
+}
+.container .title,
+.filter-selection,
+.bank-data-container {
+  margin-bottom: 1rem;
+}
