@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+const authRoutes = require("./routes/auth.route");
+
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
@@ -14,6 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Server running");
 });
+
+app.use("/api", authRoutes);
 
 const port = normalizePort(process.env.PORT || 8000);
 
